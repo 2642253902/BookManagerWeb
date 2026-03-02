@@ -96,9 +96,28 @@
     <div class="page-wrapper">
         <div class="main-content">
 
+            <div class="row">
+                <div class="colxl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="page-title-wrapper">
+                        <div class="page-title-box">
+                            <h4 class="page-title bold">图书借阅管理</h4>
+                        </div>
+                        <div class="breadcrumb-list">
+                            <ul>
+                                <li class="breadcrumb-link">
+                                    <a href="javascript:void(0);"><i class="fas fa-home mr-2">图书借阅管理</i></a>
+                                </li>
+                                <li class="breadcrumb-link active">图书管理系统</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Dashboard Start -->
             <div class="row">
                 <div class="col-xl-3 col-lg-4 col-md-6">
+
                     <!-- Start Card-->
                     <div class="card ad-info-card">
                         <div class="card-body dd-flex align-items-center">
@@ -261,8 +280,8 @@
                     <div class="card chart-card">
                         <div class="card-header">
                             <h4 class="has-btn">图书借阅列表
-                                <span><button type="button"
-                                              class="btn btn-primary squer-btn sm-btn">添加借阅信息</button>
+                                <span><a type="button" href="add-borrow"
+                                              class="btn btn-primary squer-btn sm-btn" >添加借阅信息</a>
                                 </span>
                             </h4>
                         </div>
@@ -281,14 +300,14 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>#JH2033</td>
-                                            <td>我是书名</td>
-                                            <td>22/06/2021</td>
-                                            <td>我是学生</td>
-                                            <td>#1111</td>
+                                        <tr th:each="borrow : ${borrow_list}">
+                                            <td th:text="${borrow.getBook_id()}">#JH2033</td>
+                                            <td th:text="${borrow.getBook_name()}">我是书名</td>
+                                            <td th:text="${borrow.getTime()}">22/06/2021</td>
+                                            <td th:text="${borrow.getStudent_name()}"> 我是学生</td>
+                                            <td th:text="'#'+${borrow.getStudent_id()}">#1111</td>
                                             <td class="relative">
-                                                <a class="action-btn " href="#">
+                                                <a class="action-btn " th:href="'return-book?id='+${borrow.getId()}">
                                                     <svg class="default-size " viewbox="0 0 341.333 341.333 ">
                                                         <g>
                                                             <g>
