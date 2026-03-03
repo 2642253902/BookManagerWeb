@@ -1,5 +1,6 @@
 package com.book.servlet.pages;
 
+import com.book.entity.Book;
 import com.book.entity.User;
 import com.book.service.BookService;
 import com.book.service.impl.BookServiceImpl;
@@ -12,6 +13,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.thymeleaf.context.Context;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
 
 @WebServlet("/books")
 public class BookServlet extends HttpServlet {
@@ -28,8 +32,12 @@ public class BookServlet extends HttpServlet {
         Context context = new Context();
         User user = (User) req.getSession().getAttribute("user");
         context.setVariable("nickname", user.getNickname());
-        context.setVariable("borrow_list", bookService.getBorrowList());
-        ThymeleafUtil.process("books.html", new Context(), resp.getWriter());
+
+        Map<Book, Boolean> bookList = bookService.getBookList();
+        context.setVariable("book_list", bookList.keySet());
+        context.setVariable("borrow_list_state", new ArrayList<>(bookList.values()));
+        System.out.println(bookList);
+        ThymeleafUtil.process("books.html", context, resp.getWriter());
     }
 
 }

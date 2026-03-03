@@ -1,6 +1,6 @@
-package com.book.servlet.pages;
+package com.book.servlet.manage;
 
-import com.book.entity.User;
+
 import com.book.service.BookService;
 import com.book.service.StudentService;
 import com.book.service.impl.BookServiceImpl;
@@ -15,12 +15,11 @@ import org.thymeleaf.context.Context;
 
 import java.io.IOException;
 
-@WebServlet("/index")
-public class IndexServlet extends HttpServlet {
+@WebServlet("/add-borrow")
+public class AddBorrowServlet extends HttpServlet {
 
     BookService bookService;
     StudentService studentService;
-
 
     @Override
     public void init() throws ServletException {
@@ -30,15 +29,18 @@ public class IndexServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         Context context = new Context();
-        User user = (User) req.getSession().getAttribute("user");
-        context.setVariable("nickname", user.getNickname());
-        context.setVariable("borrow_list", bookService.getBorrowList());
+        context.setVariable("book_list", bookService.getActiveBookList());
+        context.setVariable("student_list", studentService.getStudentList());
 
-        context.setVariable("book_count", bookService.getActiveBookList().size());
-        context.setVariable("student_count",studentService.getStudentList().size());
+        ThymeleafUtil.process("add-borrow.html", context, resp.getWriter());
+    }
 
-        ThymeleafUtil.process("index.html", context, resp.getWriter());
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Integer sid = Integer.valueOf(req.getParameter("student"));
+        Integer bid = Integer.valueOf(req.getParameter("book"));
+        bookService.addBorrow(sid, bid);
+        resp.sendRedirect("index");
     }
 }

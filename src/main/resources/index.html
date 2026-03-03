@@ -202,8 +202,8 @@
                                     </svg>
                             </div>
                             <div class="icon-info-text">
-                                <h5 class="ad-title">满意的客户</h5>
-                                <h4 class="ad-card-title">66k</h4>
+                                <h5 class="ad-title">学生数量</h5>
+                                <h4 class="ad-card-title" th:text="${student_count}">66k</h4>
                             </div>
                         </div>
                     </div>
@@ -220,8 +220,8 @@
                                 </svg>
                             </div>
                             <div class="icon-info-text">
-                                <h5 class="ad-title">每日订单</h5>
-                                <h4 class="ad-card-title">15k</h4>
+                                <h5 class="ad-title">书籍数量</h5>
+                                <h4 class="ad-card-title" th:text="${book_count}">15k</h4>
                             </div>
                         </div>
                     </div>
@@ -242,8 +242,8 @@
                                 </svg>
                             </div>
                             <div class="icon-info-text">
-                                <h5 class="ad-title">总销售额</h5>
-                                <h4 class="ad-card-title">420k</h4>
+                                <h5 class="ad-title">借阅数量</h5>
+                                <h4 class="ad-card-title" th:text="${borrow_list.size()}">420k</h4>
                             </div>
                         </div>
                     </div>
@@ -267,8 +267,8 @@
                                 </svg>
                             </div>
                             <div class="icon-info-text">
-                                <h5 class="ad-title">总收入</h5>
-                                <h4 class="ad-card-title">10k</h4>
+                                <h5 class="ad-title">图书馆总营收</h5>
+                                <h4 class="ad-card-title">5,000,000$</h4>
                             </div>
                         </div>
                     </div>
@@ -281,7 +281,7 @@
                         <div class="card-header">
                             <h4 class="has-btn">图书借阅列表
                                 <span><a type="button" href="add-borrow"
-                                              class="btn btn-primary squer-btn sm-btn" >添加借阅信息</a>
+                                         class="btn btn-primary squer-btn sm-btn">添加借阅信息</a>
                                 </span>
                             </h4>
                         </div>

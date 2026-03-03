@@ -10,23 +10,21 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/return-book")
-public class ReturnServlet extends HttpServlet {
+@WebServlet("/delete-book")
+public class DeleteBookServlet extends HttpServlet {
 
     BookService bookService;
 
     @Override
     public void init() throws ServletException {
-        bookService= new BookServiceImpl();
+        bookService = new BookServiceImpl();
     }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
-        //归还操作
-        bookService.returnBook(id);
-        resp.sendRedirect("index");
-
-
+        int id = Integer.parseInt(req.getParameter("bid"));
+        bookService.deleteBook(String.valueOf(id));
+        resp.sendRedirect("books");
     }
 }
